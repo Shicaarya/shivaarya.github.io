@@ -1,608 +1,563 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>SYDE 572 – Assignment 1</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            background: #f5f7fa;
-            color: #222;
-            line-height: 1.65;
-        }
-
-        header {
-            background: #203b5a;
-            color: white;
-            text-align: center;
-            padding: 55px 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 38px;
-        }
-
-        header p {
-            margin-top: 10px;
-            font-size: 18px;
-        }
-
-        nav {
-            background: white;
-            padding: 15px;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            z-index: 10;
-        }
-
-        nav a {
-            color: #203b5a;
-            text-decoration: none;
-            margin: 0 12px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            max-width: 1000px;
-            margin: auto;
-            padding: 30px 20px 70px;
-        }
-
-        section {
-            background: white;
-            margin: 30px 0;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-        }
-
-        h2 {
-            color: #203b5a;
-            border-bottom: 3px solid #d9e3ee;
-            padding-bottom: 10px;
-        }
-
-        h3 {
-            color: #32658a;
-            margin-top: 35px;
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-            margin-top: 22px;
-        }
-
-        .image-grid img,
-        .main-image {
-            width: 100%;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
-
-        figure {
-            margin: 25px 0;
-        }
-
-        figcaption {
-            text-align: center;
-            font-style: italic;
-            color: #666;
-            margin-top: 7px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 25px;
-        }
-
-        th {
-            background: #dce6f1;
-        }
-
-        th, td {
-            border: 1px solid #bbb;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .result-box {
-            background: #eef5fa;
-            border-left: 5px solid #32658a;
-            padding: 15px 20px;
-            margin: 20px 0;
-        }
-
-        .code-link {
-            display: inline-block;
-            padding: 10px 16px;
-            margin: 6px;
-            background: #203b5a;
-            color: white;
-            border-radius: 6px;
-            text-decoration: none;
-        }
-
-        .code-link:hover {
-            background: #32658a;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            background: #203b5a;
-            color: white;
-        }
-
-        @media(max-width: 600px) {
-            header h1 {
-                font-size: 28px;
-            }
-
-            nav {
-                position: static;
-            }
-
-            nav a {
-                display: block;
-                margin: 8px;
-            }
-
-            section {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SYDE 572 – Assignment 1 | Shiva Arya</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
-
 <body>
 
-<header>
-    <h1>SYDE 572 – Assignment 1</h1>
-    <p>Shiva Arya</p>
-    <p>University of Waterloo</p>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">University of Waterloo · SYDE 572</div>
+    <h1>Assignment 1</h1>
+    <p>Shortest distance to a function, numerical optimization, and function fitting using analytical and numerical approaches.</p>
+    <div class="meta">
+      <span class="pill">Shiva Arya</span>
+      <span class="pill">Part 1 · Distance Optimization</span>
+      <span class="pill">Part 2 · Function Fitting</span>
+    </div>
+  </div>
 </header>
 
-
 <nav>
+  <div class="nav-inner">
     <a href="#part1">Part 1</a>
+    <a href="#newton">Newton-Raphson</a>
+    <a href="#golden">Golden Section</a>
     <a href="#part2">Part 2</a>
-    <a href="#handwork">Handwritten Work</a>
-    <a href="#conclusion">Conclusion</a>
+    <a href="#comparison">Results</a>
+    <a href="#code">Python Code</a>
+  </div>
 </nav>
-
 
 <main>
 
-<section id="part1">
+<section id="part1" class="part">
+  <h2 class="part-title">Part 1 — Shortest Distance to a Function</h2>
+  <p class="lead">The goal of this part is to find the shortest distance from several points to the parabola <strong>y = x² + 5</strong>. The tested points are (0,0), (-4,0), (-8,0), (2,0), and (6,0).</p>
 
-    <h2>Part 1 – Shortest Distance to a Function</h2>
-
-    <p>
-        In this part, I am finding the shortest distance from different points
-        to a parabola function. The function I am using is
-        <strong>y = x² + 5</strong>.
-    </p>
-
-    <p>
-        The points I am testing are
-        (0,0), (-4,0), (-8,0), (2,0), and (6,0).
-    </p>
-
-
+  <article class="card">
     <h3>1.1 Analytical Method</h3>
+    <p>I started with the distance formula between the external point and a point on the parabola. I then squared the distance to simplify the calculation, differentiated the squared distance function, set the derivative equal to zero, and substituted the required points to find the closest point on the parabola. The resulting x-value was then used to calculate the actual distance.</p>
+    <div class="grid">
+      <figure><img src="images/analytical-main.jpeg" alt="Main analytical calculation"><figcaption>Hand calculation — main analytical work.</figcaption></figure>
+      <figure><img src="images/analytical-continuation.jpeg" alt="Analytical continuation"><figcaption>Hand calculation — continuation.</figcaption></figure>
+    </div>
+  </article>
 
-    <p>
-        I started by using the distance formula between the point and a point
-        on the parabola. Then I squared the distance formula to make the
-        calculation easier. After that, I differentiated the squared distance
-        function. I set the derivative equal to zero and substituted the
-        different points to find the closest point on the parabola. Finally,
-        I used the closest x-value to calculate the actual distance.
-    </p>
+  <article class="card" id="newton">
+    <h3>1.2 Newton-Raphson Method by Hand</h3>
+    <p>The first and second derivatives were used to calculate an updated value of x. I started from a convenient initial guess, repeatedly substituted each new x-value back into the Newton-Raphson formula, and stopped when the difference between consecutive values became very small.</p>
+    <div class="grid">
+      <figure><img src="images/newton-derivation.jpeg" alt="Newton derivation"><figcaption>Newton-Raphson derivation.</figcaption></figure>
+      <figure><img src="images/newton-hand-iterations.jpeg" alt="Newton hand iterations"><figcaption>Newton-Raphson hand iterations.</figcaption></figure>
+    </div>
+  </article>
 
-
-    <h3>1.2 Newton-Raphson Method</h3>
-
-    <p>
-        For the Newton-Raphson method, I used the first and second derivatives
-        to calculate an updated value of x. I started with an initial guess
-        and repeatedly substituted each new x-value back into the formula.
-        I stopped when the difference between two consecutive values became
-        very small. The final x-value was then used to calculate the shortest
-        distance.
-    </p>
-
-
+  <article class="card">
     <h3>1.3 Newton-Raphson Python Results</h3>
-
-    <p>
-        I created a Python program to apply Newton-Raphson to all five required
-        points. The program takes the point coordinates and an initial guess,
-        performs the iterations, and prints the closest x-value, corresponding
-        y-value and shortest distance.
-    </p>
-
-    <div class="image-grid">
-
-        <figure>
-            <img src="images/newton00point.png">
-            <figcaption>Point (0,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/newton-40.png">
-            <figcaption>Point (-4,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/newton-80.png">
-            <figcaption>Point (-8,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/newton20.png">
-            <figcaption>Point (2,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/newton60.png">
-            <figcaption>Point (6,0)</figcaption>
-        </figure>
-
+    <p>The Python program takes the point coordinates and an initial guess, performs the Newton-Raphson iterations, and returns the closest x-value, corresponding y-value, and shortest distance.</p>
+    <div class="grid three">
+      <figure><img src="images/newton-00.png"><figcaption>Point (0,0)</figcaption></figure>
+      <figure><img src="images/newton-minus4.png"><figcaption>Point (-4,0)</figcaption></figure>
+      <figure><img src="images/newton-minus8.png"><figcaption>Point (-8,0)</figcaption></figure>
+      <figure><img src="images/newton-2.png"><figcaption>Point (2,0)</figcaption></figure>
+      <figure><img src="images/newton-6.png"><figcaption>Point (6,0)</figcaption></figure>
     </div>
+  </article>
 
-
+  <article class="card" id="golden">
     <h3>1.4 Golden Section Search</h3>
+    <p>I selected a search interval and calculated two internal points using the golden ratio. Their squared distances were compared and the side with the larger distance was removed. Repeating this process gradually reduced the interval around the minimum. This method does not require derivatives.</p>
+    <figure><img class="full" src="images/golden-hand.jpeg" alt="Golden section handwritten work"><figcaption>Golden Section Search handwritten setup.</figcaption></figure>
+  </article>
 
-    <p>
-        For Golden Section Search, I started by selecting a search interval
-        and calculating two points inside it using the golden ratio. I compared
-        the squared distances at these points and removed the side with the
-        larger value. This progressively reduced the interval until it became
-        very small. Unlike Newton-Raphson, this method does not require
-        derivatives.
-    </p>
-
-
+  <article class="card">
     <h3>1.5 Golden Section Search Python Results</h3>
-
-    <div class="image-grid">
-
-        <figure>
-            <img src="images/Goldensection00.png">
-            <figcaption>Point (0,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/Goldensection-40.png">
-            <figcaption>Point (-4,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/goldensearch-80.png">
-            <figcaption>Point (-8,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/goldensearch20.png">
-            <figcaption>Point (2,0)</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/goldensearch60.png">
-            <figcaption>Point (6,0)</figcaption>
-        </figure>
-
+    <div class="grid three">
+      <figure><img src="images/golden-00.png"><figcaption>Point (0,0)</figcaption></figure>
+      <figure><img src="images/golden-minus4.png"><figcaption>Point (-4,0)</figcaption></figure>
+      <figure><img src="images/golden-minus8.png"><figcaption>Point (-8,0)</figcaption></figure>
+      <figure><img src="images/golden-2.png"><figcaption>Point (2,0)</figcaption></figure>
+      <figure><img src="images/golden-6.png"><figcaption>Point (6,0)</figcaption></figure>
     </div>
+  </article>
 
-
+  <article class="card">
     <h3>1.6 Non-Polynomial Function Test</h3>
-
-    <p>
-        To check that the numerical methods were not limited to polynomial
-        functions, I tested them using the exponential function
-        <strong>y = e<sup>x</sup></strong>. Both Newton-Raphson and Golden
-        Section Search converged to almost the same closest point and distance.
-    </p>
-
-    <div class="image-grid">
-
-        <figure>
-            <img src="images/ExponentialNewtonraphson.png">
-            <figcaption>Newton-Raphson – exponential function</figcaption>
-        </figure>
-
-        <figure>
-            <img src="images/ExponentialGoldensearch46.png">
-            <figcaption>Golden Section Search – exponential function</figcaption>
-        </figure>
-
+    <p>To test whether the numerical methods also work beyond polynomial functions, I used the exponential function <strong>y = eˣ</strong>. Newton-Raphson and Golden Section Search converged to almost the same closest point and distance.</p>
+    <div class="grid">
+      <figure><img src="images/exponential-newton.png"><figcaption>Newton-Raphson on the exponential function.</figcaption></figure>
+      <figure><img src="images/exponential-golden.png"><figcaption>Golden Section Search on the exponential function.</figcaption></figure>
     </div>
+  </article>
 
+  <article class="card">
+    <h3>1.7 Intermediate-Step Plots</h3>
+    <p>The intermediate plots show the convergence process rather than only the final answer. Newton-Raphson estimates move toward the closest point, while Golden Section Search progressively narrows the search interval around the minimum.</p>
+    <div class="grid">
+      <figure><img src="images/newton-intermediate-plot.png"><figcaption>Newton-Raphson intermediate steps.</figcaption></figure>
+      <figure><img src="images/golden-intermediate-plot.png"><figcaption>Golden Section Search intermediate intervals.</figcaption></figure>
+    </div>
+  </article>
 
-    <h3>1.7 Intermediate-Step Plot</h3>
-
-    <p>
-        The intermediate-step plots show how the numerical methods approach
-        the final solution. For Newton-Raphson, successive estimates move
-        toward the closest point on the curve.
-    </p>
-
-    <figure>
-        <img class="main-image" src="images/EXPOgRAPH.png">
-        <figcaption>
-            Newton-Raphson intermediate steps on the exponential function
-        </figcaption>
-    </figure>
-
-
+  <article class="card" id="comparison">
     <h3>1.8 Part 1 Results Summary</h3>
-
-    <p>
-        The analytical method, Newton-Raphson and Golden Section Search
-        produced very similar results for all five required points. This
-        shows that both numerical methods were able to approximate the
-        analytical solution accurately.
-    </p>
-
+    <p>The analytical method, Newton-Raphson, and Golden Section Search produced very similar results for all five required points.</p>
     <table>
-
-        <tr>
-            <th>Point</th>
-            <th>Analytical</th>
-            <th>Newton-Raphson</th>
-            <th>Golden Section</th>
-        </tr>
-
-        <tr>
-            <td>(0,0)</td>
-            <td>5.0000</td>
-            <td>5.0000</td>
-            <td>5.0000</td>
-        </tr>
-
-        <tr>
-            <td>(-4,0)</td>
-            <td>6.2898</td>
-            <td>6.2898</td>
-            <td>6.2898</td>
-        </tr>
-
-        <tr>
-            <td>(-8,0)</td>
-            <td>9.1334</td>
-            <td>9.1334</td>
-            <td>9.1334</td>
-        </tr>
-
-        <tr>
-            <td>(2,0)</td>
-            <td>5.3514</td>
-            <td>5.3514</td>
-            <td>5.3514</td>
-        </tr>
-
-        <tr>
-            <td>(6,0)</td>
-            <td>7.6031</td>
-            <td>7.6031</td>
-            <td>7.6031</td>
-        </tr>
-
+      <thead><tr><th>Point</th><th>Analytical</th><th>Newton-Raphson</th><th>Golden Section</th></tr></thead>
+      <tbody>
+        <tr><td>(0,0)</td><td>5.0000</td><td>5.0000</td><td>5.0000</td></tr>
+        <tr><td>(-4,0)</td><td>6.2898</td><td>6.2898</td><td>6.2898</td></tr>
+        <tr><td>(-8,0)</td><td>9.1334</td><td>9.1334</td><td>9.1334</td></tr>
+        <tr><td>(2,0)</td><td>5.3514</td><td>5.3514</td><td>5.3514</td></tr>
+        <tr><td>(6,0)</td><td>7.6031</td><td>7.6031</td><td>7.6031</td></tr>
+      </tbody>
     </table>
-
+  </article>
 </section>
 
+<section id="part2" class="part">
+  <h2 class="part-title">Part 2 — Fitting a Function</h2>
+  <p class="lead">A straight line and a parabola were fitted to the given data by minimizing Mean Squared Error (MSE). A smaller MSE indicates that the fitted function is closer to the data points.</p>
 
-
-<section id="part2">
-
-    <h2>Part 2 – Fitting a Function</h2>
-
-    <p>
-        In this part, I fitted both a straight line and a parabola to the given
-        data points. The aim was to find the parameters that minimise the Mean
-        Squared Error (MSE). A smaller MSE means that the fitted function is
-        closer to the original data.
-    </p>
-
-
+  <article class="card">
     <h3>2.1 Mean Squared Error and Line Fitting</h3>
+    <p>I first used the straight-line model <strong>y = mx + b</strong>. For each data point, I calculated the predicted value and compared it with the actual y-value. The difference is the error, and the average of the squared errors gives the MSE.</p>
+    <figure><img class="full" src="images/line-mse-hand.jpeg"><figcaption>Handwritten MSE introduction for the line.</figcaption></figure>
+  </article>
 
-    <p>
-        I first fitted a straight line using y = mx + b. For each point, I
-        calculated the predicted value and compared it with the actual value.
-        The errors were squared and averaged to form the MSE.
-    </p>
-
-
-    <h3>2.2 Line – Analytical Solution</h3>
-
-    <p>
-        I wrote the MSE as a function of m and b and calculated the partial
-        derivatives with respect to both parameters. Setting both derivatives
-        equal to zero gave the values that minimise the error.
-    </p>
-
-    <div class="result-box">
-        <strong>Final line:</strong> y = 2.3x - 0.2<br>
-        <strong>MSE:</strong> 0.575
+  <article class="card">
+    <h3>2.2 Line — Analytical and Numerical Solution</h3>
+    <p>The analytical solution was found by writing the MSE as a function of m and b, taking the partial derivatives with respect to both parameters, and setting them equal to zero. The numerical method then updated m and b using Newton-Raphson until the changes became very small.</p>
+    <div class="result">Final fitted line: <strong>y = 2.3x − 0.2</strong> · MSE = <strong>0.575</strong></div>
+    <div class="grid">
+      <figure><img src="images/line-python-output.png"><figcaption>Line-fitting program output.</figcaption></figure>
+      <figure><img src="images/line-intermediate-plot.png"><figcaption>Line-fitting intermediate iterations.</figcaption></figure>
     </div>
+  </article>
 
-
-    <h3>2.3 Line – Numerical Python Method</h3>
-
-    <p>
-        For the numerical solution, I used Newton-Raphson to update m and b
-        one at a time. The process was repeated until the changes became very
-        small. The final numerical values agreed with the analytical result.
-    </p>
-
-
-    <h3>2.4 Line – Intermediate-Step Plot</h3>
-
-    <p>
-        The lines move progressively toward the final fitted solution.
-    </p>
-
-    <figure>
-        <img
-            class="main-image"
-            src="images/Screenshot%202026-09-29%20213649.png"
-        >
-        <figcaption>Line-fitting intermediate iterations</figcaption>
-    </figure>
-
-
-    <h3>2.5 Parabola – Analytical Solution</h3>
-
-    <p>
-        For the parabola, I used y = ax² + bx + c. I created the MSE using
-        the prediction errors and calculated the partial derivatives with
-        respect to a, b and c. Solving the three equations gave the final
-        parabola parameters.
-    </p>
-
-    <div class="result-box">
-        <strong>a = 0.75</strong><br>
-        <strong>b = 0.05</strong><br>
-        <strong>c = 0.55</strong><br><br>
-
-        <strong>Final parabola:</strong>
-        y = 0.75x² + 0.05x + 0.55
+  <article class="card">
+    <h3>2.3 Parabola — Analytical Solution and MSE</h3>
+    <p>For the parabola, I used the general model <strong>y = ax² + bx + c</strong>. I formed the MSE from the prediction errors, calculated the partial derivatives with respect to a, b, and c, and solved the resulting equations.</p>
+    <div class="result">a = <strong>0.75</strong> · b = <strong>0.05</strong> · c = <strong>0.55</strong><br>Final parabola: <strong>y = 0.75x² + 0.05x + 0.55</strong><br>MSE = <strong>0.0125</strong></div>
+    <div class="grid">
+      <figure><img src="images/parabola-hand.jpeg"><figcaption>Parabola fitting — handwritten analytical work.</figcaption></figure>
+      <figure><img src="images/parabola-mse-hand.jpeg"><figcaption>Parabola — final squared errors and MSE.</figcaption></figure>
     </div>
+  </article>
 
-
-    <h3>2.6 Parabola – MSE</h3>
-
-    <p>
-        I substituted the x-values into the fitted parabola, calculated the
-        errors, squared them and averaged them.
-    </p>
-
-    <div class="result-box">
-        <strong>Parabola MSE = 0.0125</strong>
+  <article class="card">
+    <h3>2.4 Parabola — Numerical Python Method</h3>
+    <p>Newton-Raphson was used to update a, b, and c one at a time. The iterations continued until the changes in all three parameters became very small, producing values consistent with the analytical solution.</p>
+    <div class="grid">
+      <figure><img src="images/parabola-python-output.png"><figcaption>Parabola-fitting Python output.</figcaption></figure>
+      <figure><img src="images/parabola-intermediate-plot.png"><figcaption>Parabola-fitting intermediate iterations.</figcaption></figure>
     </div>
+  </article>
 
-
-    <h3>2.7 Parabola – Numerical Python Method</h3>
-
-    <p>
-        I used Newton-Raphson to update a, b and c one at a time. The
-        iterations continued until the changes in all three parameters became
-        very small. The numerical result was consistent with the analytical
-        solution.
-    </p>
-
-
-    <h3>2.8 Parabola – Intermediate-Step Plot</h3>
-
-    <figure>
-        <img class="main-image" src="images/P_MSE.png">
-        <figcaption>Parabola-fitting intermediate iterations</figcaption>
-    </figure>
-
-
-    <h3>2.9 Final Part 2 Comparison</h3>
-
+  <article class="card">
+    <h3>2.5 Final Comparison</h3>
     <table>
-
-        <tr>
-            <th>Model</th>
-            <th>Final Equation</th>
-            <th>MSE</th>
-        </tr>
-
-        <tr>
-            <td>Line</td>
-            <td>y = 2.3x - 0.2</td>
-            <td>0.575</td>
-        </tr>
-
-        <tr>
-            <td>Parabola</td>
-            <td>y = 0.75x² + 0.05x + 0.55</td>
-            <td>0.0125</td>
-        </tr>
-
+      <thead><tr><th>Model</th><th>Final Equation</th><th>MSE</th></tr></thead>
+      <tbody>
+        <tr><td>Line</td><td>y = 2.3x − 0.2</td><td>0.575</td></tr>
+        <tr><td>Parabola</td><td>y = 0.75x² + 0.05x + 0.55</td><td>0.0125</td></tr>
+      </tbody>
     </table>
-
+    <p>The parabola has the smaller MSE and therefore follows these data points more closely than the fitted line.</p>
+  </article>
 </section>
 
+<section class="part">
+  <article class="card">
+    <h3>Conclusion</h3>
+    <p>In Part 1, analytical calculus, Newton-Raphson, and Golden Section Search produced closely matching shortest-distance results. The numerical methods also worked with an exponential function. In Part 2, both a line and a parabola were fitted by minimizing MSE, and the parabola produced the lower fitting error. Overall, the assignment demonstrated how analytical and iterative numerical methods can be used to solve optimization problems.</p>
+  </article>
+</section>
 
+<section id="code" class="part">
+  <h2 class="part-title">Python Code</h2>
+  <p class="lead">The complete Python programs used in the assignment are available below as downloadable files and expandable code sections.</p>
 
-<section id="handwork">
-
-    <h2>Handwritten Work</h2>
-
-    <p>
-        The following images show my handwritten calculations and working
-        throughout the assignment.
-    </p>
-
-    <div class="image-grid">
-
-        <img src="images/photo_1_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_2_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_3_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_4_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_5_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_6_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_7_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_8_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_9_2026-09-30_10-41-12.jpg">
-        <img src="images/photo_10_2026-09-30_10-41-12.jpg">
-
+  <article class="card">
+    <h3>Appendix A — Part 1 Newton-Raphson</h3>
+    
+    <div class="code-actions">
+      <a class="button" href="code/newton_raphson.py" download>Download newton_raphson.py</a>
     </div>
+    <details>
+      <summary>View Newton-Raphson code</summary>
+      <pre><code>from math import sqrt, exp
 
-</section>
+print(&quot;Choose a function:&quot;)
+print(&quot;1 = Parabola&quot;)
+print(&quot;2 = Exponential&quot;)
+choice = input(&quot;Enter 1 or 2: &quot;)
 
+if choice == &quot;1&quot;:
+    A = float(input(&quot;Enter A: &quot;))
+    B = float(input(&quot;Enter B: &quot;))
+    C = float(input(&quot;Enter C: &quot;))
 
+    def f(x):
+        return A*x**2 + B*x + C
 
-<section id="conclusion">
+    def derivative1(x):
+        return 2*A*x + B
 
-    <h2>Conclusion</h2>
+    def derivative2(x):
+        return 2*A
 
-    <p>
-        In this assignment, I used both analytical and numerical methods to
-        solve two optimisation problems. In Part 1, I found the shortest
-        distance from different points to a parabola using calculus,
-        Newton-Raphson and Golden Section Search. The numerical methods
-        produced results that were very close to the analytical solution and
-        also worked with an exponential function.
-    </p>
+elif choice == &quot;2&quot;:
 
-    <p>
-        In Part 2, I fitted both a straight line and a parabola to the given
-        data points by minimising the Mean Squared Error. The parabola
-        produced a much smaller MSE than the line, showing that it fitted the
-        data more closely.
-    </p>
+    def f(x):
+        return exp(x)
 
+    def derivative1(x):
+        return exp(x)
+
+    def derivative2(x):
+        return exp(x)
+
+else:
+    print(&quot;Invalid choice&quot;)
+    exit()
+
+t = float(input(&quot;Enter x-coordinate of point: &quot;))
+z = float(input(&quot;Enter y-coordinate of point: &quot;))
+x = float(input(&quot;Enter an initial guess for x: &quot;))
+
+for i in range(100):
+    y = f(x)
+
+    derivativeD = (
+        2*(x - t)
+        + 2*(y - z)*derivative1(x)
+    )
+
+    derivativeD2 = (
+        2
+        + 2*(derivative1(x)**2)
+        + 2*(y - z)*derivative2(x)
+    )
+
+    xnew = x - derivativeD / derivativeD2
+
+    print(&quot;iteration&quot;, i, &quot;x =&quot;, xnew)
+
+    if abs(xnew - x) &lt; 0.0001:
+        x = xnew
+        break
+
+    x = xnew
+
+y = f(x)
+distance = sqrt((x - t)**2 + (y - z)**2)
+
+print(&quot;\nFinal result&quot;)
+print(&quot;x =&quot;, x)
+print(&quot;y =&quot;, y)
+print(&quot;distance =&quot;, distance)
+</code></pre>
+    </details>
+    
+  </article>
+
+  <article class="card">
+    <h3>Appendix B — Part 1 Golden Section Search</h3>
+    
+    <div class="code-actions">
+      <a class="button" href="code/golden_section.py" download>Download golden_section.py</a>
+    </div>
+    <details>
+      <summary>View Golden Section Search code</summary>
+      <pre><code>from math import sqrt, exp
+
+print(&quot;Choose a function:&quot;)
+print(&quot;1 = Parabola&quot;)
+print(&quot;2 = Exponential&quot;)
+choice = input(&quot;Enter 1 or 2: &quot;)
+
+if choice == &quot;1&quot;:
+    A = float(input(&quot;Enter A: &quot;))
+    B = float(input(&quot;Enter B: &quot;))
+    C = float(input(&quot;Enter C: &quot;))
+
+    def f(x):
+        return A*x**2 + B*x + C
+
+elif choice == &quot;2&quot;:
+
+    def f(x):
+        return exp(x)
+
+else:
+    print(&quot;Invalid choice&quot;)
+    exit()
+
+t = float(input(&quot;Enter x-coordinate of point: &quot;))
+z = float(input(&quot;Enter y-coordinate of point: &quot;))
+
+left = float(input(&quot;Enter left side of interval: &quot;))
+right = float(input(&quot;Enter right side of interval: &quot;))
+
+def distance_squared(x):
+    y = f(x)
+    return (x - t)**2 + (y - z)**2
+
+phi = (1 + sqrt(5)) / 2
+resphi = 2 - phi
+
+x1 = left + resphi * (right - left)
+x2 = right - resphi * (right - left)
+
+d1 = distance_squared(x1)
+d2 = distance_squared(x2)
+
+iteration = 0
+
+while abs(right - left) &gt; 0.0001:
+    print(&quot;iteration&quot;, iteration, &quot;interval =&quot;, left, right)
+
+    if d1 &lt; d2:
+        right = x2
+        x2 = x1
+        d2 = d1
+
+        x1 = left + resphi * (right - left)
+        d1 = distance_squared(x1)
+
+    else:
+        left = x1
+        x1 = x2
+        d1 = d2
+
+        x2 = right - resphi * (right - left)
+        d2 = distance_squared(x2)
+
+    iteration += 1
+
+best_x = (left + right) / 2
+best_y = f(best_x)
+distance = sqrt(distance_squared(best_x))
+
+print(&quot;\nFinal result&quot;)
+print(&quot;x =&quot;, best_x)
+print(&quot;y =&quot;, best_y)
+print(&quot;distance =&quot;, distance)
+</code></pre>
+    </details>
+    
+  </article>
+
+  <article class="card">
+    <h3>Appendix C — Part 2 Line Fitting</h3>
+    
+    <div class="code-actions">
+      <a class="button" href="code/line_fit.py" download>Download line_fit.py</a>
+    </div>
+    <details>
+      <summary>View line-fitting code</summary>
+      <pre><code>m = float(input(&quot;Enter m: &quot;))
+b = float(input(&quot;Enter b: &quot;))
+
+numberofpoints = int(input(&quot;How many points do you have? &quot;))
+total_points = numberofpoints
+
+xstore = []
+ystore = []
+
+while numberofpoints &gt; 0:
+    x = float(input(&quot;Enter x-coordinate of point: &quot;))
+    y = float(input(&quot;Enter y-coordinate of point: &quot;))
+
+    xstore.append(x)
+    ystore.append(y)
+
+    numberofpoints = numberofpoints - 1
+
+for iteration in range(100):
+
+    partialdrive_m = 0
+
+    for i in range(total_points):
+        prediction = m * xstore[i] + b
+        error = prediction - ystore[i]
+        partialdrive_m += xstore[i] * error
+
+    partialdrive_m = (2 / total_points) * partialdrive_m
+
+    second_m = 0
+
+    for i in range(total_points):
+        second_m += xstore[i] ** 2
+
+    second_m = (2 / total_points) * second_m
+
+    m_new = m - partialdrive_m / second_m
+
+    partialdrive_b = 0
+
+    for i in range(total_points):
+        prediction = m_new * xstore[i] + b
+        error = prediction - ystore[i]
+        partialdrive_b += error
+
+    partialdrive_b = (2 / total_points) * partialdrive_b
+
+    second_b = 2
+
+    b_new = b - partialdrive_b / second_b
+
+    print(&quot;Iteration&quot;, iteration)
+    print(&quot;m =&quot;, m_new)
+    print(&quot;b =&quot;, b_new)
+
+    if abs(m_new - m) &lt; 0.0001 and abs(b_new - b) &lt; 0.0001:
+        m = m_new
+        b = b_new
+        break
+
+    m = m_new
+    b = b_new
+
+squared_errors = []
+
+for i in range(total_points):
+    prediction = m * xstore[i] + b
+    error = prediction - ystore[i]
+    squared_errors.append(error ** 2)
+
+final_MSE = sum(squared_errors) / total_points
+
+print(&quot;Final m =&quot;, m)
+print(&quot;Final b =&quot;, b)
+print(&quot;Final MSE =&quot;, final_MSE)
+</code></pre>
+    </details>
+    
+  </article>
+
+  <article class="card">
+    <h3>Appendix D — Part 2 Parabola Fitting</h3>
+    
+    <div class="code-actions">
+      <a class="button" href="code/parabola_fit.py" download>Download parabola_fit.py</a>
+    </div>
+    <details>
+      <summary>View parabola-fitting code</summary>
+      <pre><code>a = float(input(&quot;Enter a: &quot;))
+b = float(input(&quot;Enter b: &quot;))
+c = float(input(&quot;Enter c: &quot;))
+
+numberofpoints = int(input(&quot;How many points do you have? &quot;))
+total_points = numberofpoints
+
+xstore = []
+ystore = []
+
+while numberofpoints &gt; 0:
+    x = float(input(&quot;Enter x-coordinate of point: &quot;))
+    y = float(input(&quot;Enter y-coordinate of point: &quot;))
+
+    xstore.append(x)
+    ystore.append(y)
+
+    numberofpoints = numberofpoints - 1
+
+for iteration in range(100):
+
+    partialdrive_a = 0
+
+    for i in range(total_points):
+        prediction = a*xstore[i]**2 + b*xstore[i] + c
+        error = prediction - ystore[i]
+        partialdrive_a += xstore[i]**2 * error
+
+    partialdrive_a = (2 / total_points) * partialdrive_a
+
+    second_a = 0
+
+    for i in range(total_points):
+        second_a += xstore[i]**4
+
+    second_a = (2 / total_points) * second_a
+
+    a_new = a - partialdrive_a / second_a
+
+    partialdrive_b = 0
+
+    for i in range(total_points):
+        prediction = a_new*xstore[i]**2 + b*xstore[i] + c
+        error = prediction - ystore[i]
+        partialdrive_b += xstore[i] * error
+
+    partialdrive_b = (2 / total_points) * partialdrive_b
+
+    second_b = 0
+
+    for i in range(total_points):
+        second_b += xstore[i]**2
+
+    second_b = (2 / total_points) * second_b
+
+    b_new = b - partialdrive_b / second_b
+
+    partialdrive_c = 0
+
+    for i in range(total_points):
+        prediction = a_new*xstore[i]**2 + b_new*xstore[i] + c
+        error = prediction - ystore[i]
+        partialdrive_c += error
+
+    partialdrive_c = (2 / total_points) * partialdrive_c
+
+    second_c = 2
+
+    c_new = c - partialdrive_c / second_c
+
+    print(&quot;Iteration&quot;, iteration)
+    print(&quot;a =&quot;, a_new)
+    print(&quot;b =&quot;, b_new)
+    print(&quot;c =&quot;, c_new)
+
+    if (abs(a_new - a) &lt; 0.0001
+        and abs(b_new - b) &lt; 0.0001
+        and abs(c_new - c) &lt; 0.0001):
+
+        a = a_new
+        b = b_new
+        c = c_new
+        break
+
+    a = a_new
+    b = b_new
+    c = c_new
+
+squared_errors = []
+
+for i in range(total_points):
+    prediction = a*xstore[i]**2 + b*xstore[i] + c
+    error = prediction - ystore[i]
+    squared_errors.append(error**2)
+
+final_MSE = sum(squared_errors) / total_points
+
+print(&quot;Final a =&quot;, a)
+print(&quot;Final b =&quot;, b)
+print(&quot;Final c =&quot;, c)
+print(&quot;Final MSE =&quot;, final_MSE)
+</code></pre>
+    </details>
+    
+  </article>
 </section>
 
 </main>
 
-
-<footer>
-    SYDE 572 – Assignment 1
-</footer>
-
+<footer>SYDE 572 — Assignment 1 · Shiva Arya</footer>
 </body>
 </html>
